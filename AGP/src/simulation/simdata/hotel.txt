@@ -1,0 +1,5 @@
+hotel1,2,790;
+hotel2,3,920;
+hotel3,1,530;
+hotel4,4,950;
+hotel5,5,140;

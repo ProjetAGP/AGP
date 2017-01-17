@@ -1,84 +1,38 @@
 package simulation;
 
+import java.util.HashMap;
+
 import data.Hotel;
 import data.Offer;
 import data.TouristAttraction;
 import data.Trip;
-import data.constants.TouristAttractionType;
 import data.constants.Transport;
+import lucene.DataReader;
 
 public class DataTest {
 
 	public static void main(String[] args) {
 
-		Hotel hotel1 = new Hotel("hotel1", 1, 20);
-		Hotel hotel2 = new Hotel("hotel2", 3, 60);
-		Hotel hotel3 = new Hotel("hotel3", 5, 100);
-		
-		Offer offer1 = new Offer(hotel1,2);
-		Offer offer2 = new Offer(hotel2,2);
-		Offer offer3 = new Offer(hotel3,2);
-		
-		System.out.println(hotel1);
-		System.out.println(hotel2);
-		System.out.println(hotel3);
-		
-		TouristAttraction attraction1 = new TouristAttraction("attracion1", TouristAttractionType.LEISURE_SITE,Transport.AUTOBUS, 30, 60);
-		TouristAttraction attraction2 = new TouristAttraction("attracion2", TouristAttractionType.LEISURE_SITE,Transport.AUTOBUS, 50, 50);
-		TouristAttraction attraction3 = new TouristAttraction("attracion2", TouristAttractionType.HISTORIC,Transport.BOAT, 70, 40);
-		TouristAttraction attraction4 = new TouristAttraction("attracion3", TouristAttractionType.LEISURE_SITE,Transport.AUTOBUS, 90, 80);
-		TouristAttraction attraction5 = new TouristAttraction("attracion1", TouristAttractionType.HISTORIC,Transport.BOAT, 110, 100);
-		
-		System.out.println(attraction1);
-		System.out.println(attraction2);
-		System.out.println(attraction3);
-		System.out.println(attraction4);
-		System.out.println(attraction5);
-	
-		
+		HashMap<String, Hotel> hotels = DataReader.loadHotel();
+		HashMap<String, TouristAttraction> attractions = DataReader.loadSites();
 		Trip trip1 = new Trip();
 		Trip trip2 = new Trip();
 		Trip trip3 = new Trip();
-		Trip trip4 = new Trip();
-		Trip trip5 = new Trip();
-		Trip trip6 = new Trip();
-		
-		trip1.addTouristAttraction(offer1.getHotel(), attraction1);
-		trip1.addTouristAttraction(offer1.getHotel(), attraction2);
-		trip1.addTouristAttraction(offer1.getHotel(), attraction3);
-	
-		trip2.addTouristAttraction(offer2.getHotel(), attraction2);
-		trip2.addTouristAttraction(offer2.getHotel(), attraction3);
-		trip2.addTouristAttraction(offer2.getHotel(), attraction4);
-		
-		trip3.addTouristAttraction(offer3.getHotel(), attraction3);
-		trip3.addTouristAttraction(offer3.getHotel(), attraction4);
-		trip3.addTouristAttraction(offer3.getHotel(), attraction5);
-		
-		trip4.addTouristAttraction(offer3.getHotel(), attraction4);
-		trip4.addTouristAttraction(offer3.getHotel(), attraction5);
-		trip4.addTouristAttraction(offer3.getHotel(), attraction1);
-		
-		trip5.addTouristAttraction(offer2.getHotel(), attraction5);
-		trip5.addTouristAttraction(offer2.getHotel(), attraction1);
-		trip5.addTouristAttraction(offer2.getHotel(), attraction2);
-		
-		trip6.addTouristAttraction(offer1.getHotel(), attraction2);
-		trip6.addTouristAttraction(offer1.getHotel(), attraction5);
-		trip6.addTouristAttraction(offer1.getHotel(), attraction3);
-		
-		offer1.addTrip(trip1);
-		offer1.addTrip(trip6);
-		
-		offer2.addTrip(trip2);
-		offer2.addTrip(trip5);
-		
-		offer3.addTrip(trip3);
-		offer3.addTrip(trip4);
 
-		System.out.println(offer1);
-		System.out.println(offer2);
-		System.out.println(offer3);
+		Offer offer = new Offer(hotels.get("hotel2"));
+		System.out.println(hotels.get("hotel2"));
+		
+		trip1.addAttractionAndAssocaite(attractions.get("attraction1"), offer.getHotel(), Transport.BOAT);
+		trip1.addAttractionAndAssocaite(attractions.get("attraction2"), offer.getHotel(), Transport.BOAT);
+
+		trip2.addAttractionAndAssocaite(attractions.get("attraction2"), offer.getHotel(), Transport.BOAT);
+		trip2.addAttractionAndAssocaite(attractions.get("attraction3"), offer.getHotel(), Transport.AUTOBUS);
+
+		trip3.addAttractionAndAssocaite(attractions.get("attraction5"), offer.getHotel(), Transport.AUTOBUS);
+		trip3.addAttractionAndAssocaite(attractions.get("attraction4"), offer.getHotel(), Transport.AUTOBUS);
+
+		System.out.println(offer);
+
 	}
-	
+
 }
