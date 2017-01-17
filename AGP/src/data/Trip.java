@@ -3,6 +3,7 @@ package data;
 import java.util.ArrayList;
 
 import data.constants.Constants;
+import data.constants.Transport;
 
 public class Trip {
 	private ArrayList<TouristAttraction> attractions = new ArrayList<TouristAttraction>();

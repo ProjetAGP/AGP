@@ -5,6 +5,7 @@ import data.Offer;
 import data.TouristAttraction;
 import data.Trip;
 import data.constants.TouristAttractionType;
+import data.constants.Transport;
 
 public class DataTest {
 
@@ -22,11 +23,11 @@ public class DataTest {
 		System.out.println(hotel2);
 		System.out.println(hotel3);
 		
-		TouristAttraction attraction1 = new TouristAttraction("attracion1", TouristAttractionType.ACTIVITY, 30, 60);
-		TouristAttraction attraction2 = new TouristAttraction("attracion1", TouristAttractionType.ACTIVITY, 50, 50);
-		TouristAttraction attraction3 = new TouristAttraction("attracion1", TouristAttractionType.HISTORIC, 70, 40);
-		TouristAttraction attraction4 = new TouristAttraction("attracion1", TouristAttractionType.ACTIVITY, 90, 80);
-		TouristAttraction attraction5 = new TouristAttraction("attracion1", TouristAttractionType.HISTORIC, 110, 100);
+		TouristAttraction attraction1 = new TouristAttraction("attracion1", TouristAttractionType.LEISURE_SITE,Transport.AUTOBUS, 30, 60);
+		TouristAttraction attraction2 = new TouristAttraction("attracion2", TouristAttractionType.LEISURE_SITE,Transport.AUTOBUS, 50, 50);
+		TouristAttraction attraction3 = new TouristAttraction("attracion2", TouristAttractionType.HISTORIC,Transport.BOAT, 70, 40);
+		TouristAttraction attraction4 = new TouristAttraction("attracion3", TouristAttractionType.LEISURE_SITE,Transport.AUTOBUS, 90, 80);
+		TouristAttraction attraction5 = new TouristAttraction("attracion1", TouristAttractionType.HISTORIC,Transport.BOAT, 110, 100);
 		
 		System.out.println(attraction1);
 		System.out.println(attraction2);

@@ -42,7 +42,8 @@ public class Offer {
 		int activity = getAllActivityTime();
 		int transport = getAllTransportTime();
 		int hotelTime = Constants.MINUTES_IN_DAY - (activity + transport);
-		return (int) (activity*(0.75) + hotelTime * (0.1 * hotel.getRange()) - transport);
+		int comfortVal = (int) (activity*(0.75) + hotelTime * (0.1 * hotel.getRange()) - transport)/Constants.COMFORT_REGULATION;
+		return	comfortVal < 1 ? 1 : comfortVal > 5 ?  5 : comfortVal;
 	}
 	
 	public int getAllTransportTime(){
