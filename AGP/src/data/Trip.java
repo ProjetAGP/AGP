@@ -5,7 +5,8 @@ import java.util.HashMap;
 
 import data.constants.Constants;
 import data.constants.Transport;
-import engine.SimulationTools;
+import engine.AttrationsTools;
+import engine.TripTools;
 
 public class Trip {
 	private ArrayList<TouristAttraction> attractions = new ArrayList<TouristAttraction>();
@@ -15,14 +16,32 @@ public class Trip {
 
 	public float getPrice(Hotel hotel) {
 		if (price == 0)
-			for (TouristAttraction attraction : attractions){
-				System.out.println(hotel);
-				System.out.println(attraction);
-				System.out.println(getAssociatedTransport(attraction));
-				price += SimulationTools.getFullPrice(hotel, attraction, getAssociatedTransport(attraction));
-				}
+			for (TouristAttraction attraction : attractions)
+				price += AttrationsTools.getFullPrice(hotel, attraction, getAssociatedTransport(attraction));
 				return price;
 	}
+
+	public void setPrice(float value){
+		this.price = value;
+	}
+	
+	public ArrayList<TouristAttraction> getAttractions() {
+		return attractions;
+	}
+
+
+
+	public HashMap<String, Transport> getTransports() {
+		return transports;
+	}
+
+
+
+	public float getPrice() {
+		return price;
+	}
+
+
 
 	public Transport getAssociatedTransport(TouristAttraction touristAttraction) {
 		return transports.get(touristAttraction.getName());
@@ -31,35 +50,13 @@ public class Trip {
 	public boolean addAttractionAndAssocaite(TouristAttraction attraction, Hotel hotel, Transport transport) {
 		if (!attractions.contains(attraction)) {
 			transports.put(attraction.getName(), transport);			
-			System.out.println(hotel+" "+attraction+" "+getAssociatedTransport(attraction));
-			if (getFullTime(hotel) + SimulationTools.getTotalTime(hotel, attraction,
+			if (TripTools.getFullTime(hotel,this) + AttrationsTools.getTotalTime(hotel, attraction,
 					getAssociatedTransport(attraction)) < Constants.MAX_DISPONIBLE_TIME) {
 				attractions.add(attraction);
 				return true;
 			}
 		}
 		return false;
-	}
-
-	public int getFullTime(Hotel hotel) {
-		int time = 0;
-		for (TouristAttraction attraction : attractions)
-			time += SimulationTools.getTotalTime(hotel, attraction, getAssociatedTransport(attraction));
-		return time;
-	}
-
-	public int getAllTransportTime(Hotel hotel) {
-		int time = 0;
-		for (TouristAttraction attraction : attractions)
-			time += SimulationTools.getTransportTime(hotel, attraction, getAssociatedTransport(attraction));
-		return time;
-	}
-
-	public int getAllActivityTime() {
-		int time = 0;
-		for (TouristAttraction attraction : attractions)
-			time += attraction.getDuration();
-		return time;
 	}
 
 	public String toString() {

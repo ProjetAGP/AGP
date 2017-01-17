@@ -2,7 +2,9 @@ package data;
 
 import java.util.ArrayList;
 
-import engine.SimulationTools;
+import engine.AttrationsTools;
+import engine.OfferTools;
+import engine.TripTools;
 
 public class Offer {
 	private ArrayList<Trip> trips = new ArrayList<Trip>();
@@ -14,40 +16,9 @@ public class Offer {
 		this.hotel = hotel;
 	}
 
-	public float getPrice() {
-		return getHotelCost() + getTripCost();
-	}
-
-	private float getTripCost() {
-		float price = 0;
-		for (Trip trip : trips){
-			System.out.println(trip);
-			price = trip.getPrice(hotel);
-		}
-		return price;
-	}
-
-	public int getAllActivityTime() {
-		int time = 0;
-		for (Trip trip : trips)
-			time += trip.getAllActivityTime();
-		return time;
-	}
-
 	public void addTrip(Trip trip) {
 		trips.add(trip);
-		duration ++;
-	}
-	
-	public int getAllTransportTime() {
-		int time = 0;
-		for (Trip trip : trips)
-			time += trip.getAllTransportTime(hotel);
-		return time;
-	}
-
-	private float getHotelCost() {
-		return hotel.getDailyPrice() * duration;
+		duration++;
 	}
 
 	public ArrayList<Trip> getTrips() {
@@ -63,8 +34,8 @@ public class Offer {
 	}
 
 	public String toString() {
-		return "Offer [trips=" + trips + ", hotel=" + hotel + ", duration=" + duration + ", price=" + getPrice()
-				+ ", comfort=" + SimulationTools.comfort(this) + "]";
+		return "Offer [trips=" + trips + ", hotel=" + hotel + ", duration=" + duration + ", price="
+				+ OfferTools.getPrice(this) + ", comfort=" + OfferTools.comfort(this) + "]";
 	}
 
 }
