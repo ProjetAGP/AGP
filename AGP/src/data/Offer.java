@@ -20,8 +20,10 @@ public class Offer {
 
 	private float getTripCost() {
 		float price = 0;
-		for (Trip trip : trips)
+		for (Trip trip : trips){
+			System.out.println(trip);
 			price = trip.getPrice(hotel);
+		}
 		return price;
 	}
 

@@ -31,6 +31,30 @@ public class StringParser {
 		return word;
 	}
 	
+	public static String getNextWord(String line, int index,char separator,char endOfLine){
+		/**get the whole text between index and the next separation*/
+		int last = index;
+		while(line.charAt(index) != separator && line.charAt(index) != endOfLine)
+			index++;
+		String word = line.substring(last,index);
+		return word;
+	}
+	
+	public static ArrayList<String> sliceLine(String line,char separator,char endOfLine){
+		/**get the whole text between index and the next separation*/
+		ArrayList<String> words = new ArrayList<String>();
+		int index = 0;
+		while(true)
+		{
+			String word = getNextWord(line, index, separator, endOfLine);
+			words.add(word);
+			index += word.length();
+			if(line.charAt(index) == endOfLine)break;
+			index++;
+		}
+		return words;
+	}
+	
 	public static ArrayList<String> readData(String fileName) {
 		/**Read the file and place each lines of the text in an ArrayList<String>*/
 		ArrayList<String> lines = new ArrayList<String>();
@@ -47,6 +71,5 @@ public class StringParser {
 		}
 		return lines;
 	}
-
-
+	
 }

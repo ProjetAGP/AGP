@@ -7,6 +7,7 @@ import data.Hotel;
 import data.TouristAttraction;
 import data.constants.Constants;
 import data.constants.TouristAttractionType;
+import data.constants.Transport;
 import tools.parse.StringParser;
 
 public class DataReader {
@@ -37,53 +38,35 @@ public class DataReader {
 	}
 
 	private static void readSitesLine(String line, HashMap<String, TouristAttraction> attractions) {
-		int index = 0;
-		String attractionName = StringParser.getNextWord(line, index, ',');
-		index += attractionName.length() + 1;
-		String type = StringParser.getNextWord(line, index, ',');
-		index += type.length() + 1;
-		String duration = StringParser.getNextWord(line, index, ',');
-		index += duration.length() + 1;
-		String price = StringParser.getNextWord(line, index, ';');
-		TouristAttractionType attractionType = type == "historic" ? TouristAttractionType.HISTORIC
+		// format:attractionName,type,duration,price;
+		ArrayList<String> args = StringParser.sliceLine(line, ',', ';');
+		TouristAttractionType attractionType = args.get(1).equals("historic") ? TouristAttractionType.HISTORIC
 				: TouristAttractionType.LEISURE_SITE;
-		attractions.put(attractionName, new TouristAttraction(attractionName, attractionType,
-				Integer.parseInt(duration), Float.parseFloat(price)));
+		attractions.put(args.get(0), new TouristAttraction(args.get(0), attractionType, Integer.parseInt(args.get(2)),
+				Float.parseFloat(args.get(3))));
 	}
 
 	private static void readHotelLine(String line, HashMap<String, Hotel> hotels) {
 		/* format : hotelName,range,price; */
-		int index = 0;
-		String hotelName = StringParser.getNextWord(line, index, ',');
-		index += hotelName.length() + 1;
-		String range = StringParser.getNextWord(line, index, ',');
-		index += range.length() + 1;
-		String price = StringParser.getNextWord(line, index, ';');
-		hotels.put(hotelName, new Hotel(hotelName, Integer.parseInt(range), Integer.parseInt(price)));
-
+		ArrayList<String> args = StringParser.sliceLine(line, ',', ';');		
+		hotels.put(args.get(0), new Hotel(args.get(0), Integer.parseInt(args.get(1)), Integer.parseInt(args.get(2))));
 	}
 
 	private static void readTransportLine(String line, HashMap<String, Integer> datas) {
 		/* format : hotelName,attractionName,busTime,boatTime; */
-		int index = 0;
-		String hotelName = StringParser.getNextWord(line, index, ',');
-		index += hotelName.length() + 1;
-		String attractionName = StringParser.getNextWord(line, index, ',');
-		index += attractionName.length() + 1;
-		String bus = StringParser.getNextWord(line, index, ',');
-		index += bus.length() + 1;
-		String boat = StringParser.getNextWord(line, index, ';');
-		System.out.println(hotelName + " " + attractionName + " " + bus + " " + boat);
-		int boatTime = Integer.parseInt(boat);
-		int busTime = Integer.parseInt(bus);
-		addTransportLine(datas, hotelName, attractionName, boatTime);
-		addTransportLine(datas, hotelName, attractionName, busTime);
+		ArrayList<String> args = StringParser.sliceLine(line, ',', ';');
+		int busTime = Integer.parseInt(args.get(2));
+		int boatTime = Integer.parseInt(args.get(3));
+		addTransportLine(datas, args.get(0), args.get(1),"bus",busTime);
+		addTransportLine(datas, args.get(0), args.get(1),"boat", boatTime);
 	}
 
-	private static void addTransportLine(HashMap<String, Integer> datas, String hotelName, String attractionName,
+	private static void addTransportLine(HashMap<String, Integer> datas, String hotelName, String attractionName,String type,
 			int value) {
-		if (value > 0)
-			datas.put(hotelName + attractionName, value);
+		if (value > 0){
+		String key = hotelName + attractionName +type;
+			datas.put(key, value);
+		}
 	}
 
 }

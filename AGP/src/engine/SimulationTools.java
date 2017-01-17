@@ -23,11 +23,6 @@ public class SimulationTools {
 						/ Constants.COMFORT_REGULATION, 1, 5);
 	}
 
-	public static int getTimeData(TouristAttraction attraction, Hotel hotel, HashMap<String, Integer> datas) {
-		return datas.isEmpty() ? DataReader.loadTransportTime().get(hotel.getName() + attraction.getName())
-				: datas.get(hotel.getName() + attraction.getName());
-	}
-
 	public static float getTransportCost(Hotel hotel, TouristAttraction attraction, Transport transport) {
 		return getTransportTime(hotel, attraction, transport) * transport.getPrice();
 	}
@@ -36,16 +31,21 @@ public class SimulationTools {
 		return getTransportCost(hotel, attraction, transport) + attraction.getPrice();
 	}
 
-	public static float getTransportTime(Hotel hotel, TouristAttraction attraction, Transport transport) {
-		return getTimeDatas().get(hotel.getName() + attraction.getName() + transport);
+	public static int getTransportTime(Hotel hotel, TouristAttraction attraction, Transport transport) {
+		String type = transport == Transport.BOAT ? "boat" : "bus";
+		String key = hotel.getName() + attraction.getName() + type;
+		return datas.get(key) == null ? 0 : getTimeDatas(datas).get(key);
 	}
 
-	private static HashMap<String, Integer> getTimeDatas() {
-		return datas.isEmpty() ? DataReader.loadTransportTime() : datas;
+	private static HashMap<String, Integer> getTimeDatas(HashMap<String, Integer> datas) {
+		if(datas.isEmpty()) datas=DataReader.loadTransportTime(); 
+		return datas;
 	}
 
 	public static int getTotalTime(Hotel hotel, TouristAttraction attraction, Transport transport) {
-		return getTimeData(attraction, hotel, datas) + attraction.getDuration();
+		int k = getTransportTime(hotel, attraction, transport);
+		System.out.println(datas.isEmpty());
+		return k;
 	}
 
 }

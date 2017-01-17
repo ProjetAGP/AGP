@@ -15,9 +15,13 @@ public class Trip {
 
 	public float getPrice(Hotel hotel) {
 		if (price == 0)
-			for (TouristAttraction attraction : attractions)
+			for (TouristAttraction attraction : attractions){
+				System.out.println(hotel);
+				System.out.println(attraction);
+				System.out.println(getAssociatedTransport(attraction));
 				price += SimulationTools.getFullPrice(hotel, attraction, getAssociatedTransport(attraction));
-		return price;
+				}
+				return price;
 	}
 
 	public Transport getAssociatedTransport(TouristAttraction touristAttraction) {
@@ -26,11 +30,10 @@ public class Trip {
 
 	public boolean addAttractionAndAssocaite(TouristAttraction attraction, Hotel hotel, Transport transport) {
 		if (!attractions.contains(attraction)) {
-			transports.put(attraction.getName(), transport);
-			System.out.println(hotel.toString() + attraction.toString() + getAssociatedTransport(attraction));
-
+			transports.put(attraction.getName(), transport);			
+			System.out.println(hotel+" "+attraction+" "+getAssociatedTransport(attraction));
 			if (getFullTime(hotel) + SimulationTools.getTotalTime(hotel, attraction,
-					getAssociatedTransport(attraction)) > Constants.MAX_DISPONIBLE_TIME) {
+					getAssociatedTransport(attraction)) < Constants.MAX_DISPONIBLE_TIME) {
 				attractions.add(attraction);
 				return true;
 			}
@@ -60,7 +63,9 @@ public class Trip {
 	}
 
 	public String toString() {
-		return "Trip [attractions=" + attractions + ", price=" + price + "]";
+		return "Trip [attractions=" + attractions + ", transports=" + transports + ", price=" + price + "]";
 	}
+
+	
 
 }
