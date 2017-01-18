@@ -15,8 +15,8 @@ public class SimulationTools {
 	public static HashMap<String, Integer> datas = new HashMap<String, Integer>();
 
 	public static int comfort(Offer offer) {
-		int activity = offer.getAllActivityTime();
-		int transport = offer.getAllTransportTime();
+		int activity = OfferTools.getAllActivityTime(offer);
+		int transport = OfferTools.getAllTransportTime(offer);
 		int hotelTime = Constants.MINUTES_IN_DAY - (activity + transport);
 		return (int) MathTools
 				.boundValue((activity * (0.75) + hotelTime * (0.1 * offer.getHotel().getRange()) - transport)
