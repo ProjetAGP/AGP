@@ -7,6 +7,12 @@ import java.util.ArrayList;
 
 public class StringParser {
 
+	public static StringParseGenerable  generateFromParse(StringParseGenerable item ,String line,char separator,char endOfLine){
+		ArrayList<String> args = sliceLine(line,separator,endOfLine);
+		item.generateItem(args);
+		return item;
+	}
+	
 	public static int getIndexOfWord(String w, String chain) {
 		/**
 		 * get the index of the first character of the word w if chain contains
