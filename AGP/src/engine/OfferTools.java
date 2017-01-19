@@ -1,6 +1,5 @@
 package engine;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import data.Hotel;
@@ -11,15 +10,25 @@ import data.Trip;
 import data.constants.Constants;
 import tools.math.MathTools;
 public class OfferTools implements CaculationTools{
+	
 	public static int comfort(Offer offer) {
 		int activity = getAllActivityTime(offer);
 		int transport = getAllTransportTime(offer);
 		int hotelTime = Constants.MINUTES_IN_DAY - (activity + transport);
 		return (int) MathTools
-				.boundValue((activity * (0.75) + hotelTime * (0.5 * offer.getHotel().getRange()) - transport)
-						/ Constants.COMFORT_REGULATION, 1, 5);
+				.boundValue((getHotelComfort(offer,hotelTime, transport) + getActivityComfort(transport,hotelTime))/ Constants.COMFORT_REGULATION, 1, 5);
 	}
 	
+	private static float getActivityComfort(float activity, float transport) {
+		return (float) MathTools.boundValue(activity - transport, 1, 3);
+	}
+
+
+
+	private static float getHotelComfort(Offer offer, float hotelTime, float transport) {
+		return (float) MathTools.boundValue(hotelTime*offer.getHotel().getRange() - transport, 1, 3);
+	}
+
 	public static int getAllTransportTime(Offer offer) {
 		int time = 0;
 		for (Trip trip : offer.getTrips())
@@ -50,14 +59,14 @@ public class OfferTools implements CaculationTools{
 			time += TripTools.getAllActivityTime(trip);
 		return time;
 	}
-
-	public static void getWantedHotel(HashMap<String, Hotel> hotels,InputData input){
+	
+	public static void removeUnwantedHotels(HashMap<String, Hotel> hotels,InputData input){
 		for(String hotelid : hotels.keySet())
 			if(MathTools.absoluteValue(hotels.get(hotelid).getRange() - input.getComfort()) > 1)
 				hotels.remove(hotelid);
 	}
 	
-	public static void getWantedAttractions(HashMap<String, TouristAttraction> attractions,InputData input){
+	public static void removeUnwantedAttractions(HashMap<String, TouristAttraction> attractions,InputData input){
 		for(String attractionid : attractions.keySet())
 			if(input.getType() !=  attractions.get(attractionid).getType())
 				attractions.remove(attractionid);

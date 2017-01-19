@@ -11,6 +11,7 @@ import tools.parse.StringParser;
 public class DataBaseTools {
 
 	public static ArrayList<String> buildDataSet(ResultSet results) {
+		
 		ArrayList<String> lines = new ArrayList<>();
 		try {
 			String w = "";
@@ -32,7 +33,7 @@ public class DataBaseTools {
 		}
 		return lines;
 	}
-
+	
 	public static HashMap<String, StringParseGenerable> convertDataLines(StringParseGenerable generable,
 			ArrayList<String> words) {
 		HashMap<String, StringParseGenerable> items = new HashMap<String, StringParseGenerable>();

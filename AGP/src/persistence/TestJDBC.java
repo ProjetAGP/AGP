@@ -8,7 +8,7 @@ public class TestJDBC {
 
 
 	public static void main(String[] args) throws SQLException {
-
+		
 		DataBase db;
 		ResultSet Res;
 
@@ -19,7 +19,7 @@ public class TestJDBC {
 
 			System.out.println(Res.getString("NAME"));
 		}
-
+		
 	}
 
 }
