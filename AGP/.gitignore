@@ -1,1 +1,6 @@
 /bin/
+/lucene-3.6.2/
+/.classpath
+/.gitignore
+/.project
+/.settings/

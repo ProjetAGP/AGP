@@ -11,7 +11,7 @@ public class InputData implements StringParseGenerable {
 	private String keyWords;// format: w1 w2 w3 ...
 	private int comfort;
 
-	private InputData() {
+	public InputData() {
 	}
 
 	public void generateItem(ArrayList<String> args) {
@@ -22,6 +22,7 @@ public class InputData implements StringParseGenerable {
 		this.keyWords = args.get(2);
 		this.comfort = Integer.parseInt(args.get(3));
 	}
+	
 
 	public float getBudget() {
 		return budget;

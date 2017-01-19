@@ -76,7 +76,7 @@ public Indexer(String indexDirectoryPath) throws IOException{
             && file.canRead()
             && filter.accept(file)
          ){
-            indexFile(file);
+        	 indexFile(file);
          }
       }
       return writer.numDocs();

@@ -1,25 +1,43 @@
 package persistence;
 
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TestJDBC {
 
+    static DataBase db;
+    static ResultSet Res;
 
+    public static void main(String[] args) throws SQLException, IOException {
+        
 
-	public static void main(String[] args) throws SQLException {
-		
-		DataBase db;
-		ResultSet Res;
+        Parametre a = new Parametre("root", "zinebtazi", "AGP");
+        
+        DataBase db;
+        ResultSet Res;
+        
+        db = new DataBase(Parametre.Host, Parametre.username, Parametre.password, Parametre.IPHOST, Parametre.Port);
+        
+        Res = db.querySelectAll("hotel");
+        
+        while (Res.next()) {
+        	
+        	 Blob blob = Res.getBlob("PICTURE");
+             if (blob != null) {
 
-		db = new DataBase(Parametre.getHost(), Parametre.getUsername(), Parametre.getPassword(), Parametre.getIPHOST(), Parametre.getPort());
-		Res = db.querySelectAll("HOTEL");
+                 byte barr[] = blob.getBytes(1, (int) blob.length());
+                 FileOutputStream fout = new FileOutputStream(Res.getString("NAME")+".jpg");
+                 fout.write(barr);
+             }else {
+            	 
+             }
+        }
 
-		while (Res.next()) {
-
-			System.out.println(Res.getString("NAME"));
-		}
-		
-	}
+    }
 
 }

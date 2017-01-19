@@ -15,7 +15,8 @@ public class DataBase {
 	private int Port;
 	private String Host;
 
-	public DataBase(String url, String username, String password, String Host, int Port) {
+	public DataBase(String url, String username, String password, String Host,
+			int Port) {
 		this.url = url;
 		this.username = username;
 		this.password = password;
@@ -38,7 +39,8 @@ public class DataBase {
 	public Connection connexionDatabase(String uni) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(url + uni, username, password);
+			connection = DriverManager.getConnection(url + uni, username,
+					password);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -100,6 +102,8 @@ public class DataBase {
 		return this.executionQuery(SQL);
 
 	}
+	
+
 
 	public ResultSet querySelect(String[] nomColonne, String nomTable) {
 		connexionDatabase();
@@ -115,7 +119,8 @@ public class DataBase {
 		return this.executionQuery(SQL);
 	}
 
-	public ResultSet fcSelectCommand(String[] nomColonne, String nomTable, String etat) {
+	public ResultSet fcSelectCommand(String[] nomColonne, String nomTable,
+			String etat) {
 
 		connexionDatabase();
 		int i;
@@ -147,7 +152,8 @@ public class DataBase {
 		return this.executionUpdate(SQL);
 	}
 
-	public String queryUpdate(String nomTable, String[] nomColonne, String[] contenuTab, String etat) {
+	public String queryUpdate(String nomTable, String[] nomColonne,
+			String[] contenuTab, String etat) {
 
 		connexionDatabase();
 		int i;
@@ -169,46 +175,10 @@ public class DataBase {
 		return this.executionUpdate(SQL);
 	}
 
-	public Connection getConnection() {
-		return connection;
-	}
-
-	public Statement getStatement() {
-		return statement;
-	}
-
-	public String getSQL() {
-		return SQL;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public Socket getClient() {
-		return client;
-	}
-
-	public int getPort() {
-		return Port;
-	}
-
-	public String getHost() {
-		return Host;
-	}
-
 	public String queryDelete(String nomTable, String etat) {
 		connexionDatabase();
 		SQL = "DELETE FROM " + nomTable + " WHERE " + etat;
 		return this.executionUpdate(SQL);
 	}
-	
+
 }

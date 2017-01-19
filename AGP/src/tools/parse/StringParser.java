@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class StringParser {
 
@@ -17,6 +18,16 @@ public class StringParser {
 		ArrayList<String> args = sliceLine(line,separator);
 		item.generateItem(args);
 		return item;
+	}
+	
+	public static HashMap<String, StringParseGenerable> convertDataLines(StringParseGenerable generable,
+			ArrayList<String> words) {
+		HashMap<String, StringParseGenerable> items = new HashMap<String, StringParseGenerable>();
+		for (String word : words) {
+			StringParser.generateFromParse(generable, word, ',', ';');
+			items.put(generable.getName(), generable);
+		}
+		return items;
 	}
 	
 	public static int getIndexOfWord(String w, String chain) {

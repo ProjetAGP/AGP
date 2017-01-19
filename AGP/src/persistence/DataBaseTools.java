@@ -33,15 +33,5 @@ public class DataBaseTools {
 		}
 		return lines;
 	}
-	
-	public static HashMap<String, StringParseGenerable> convertDataLines(StringParseGenerable generable,
-			ArrayList<String> words) {
-		HashMap<String, StringParseGenerable> items = new HashMap<String, StringParseGenerable>();
-		for (String word : words) {
-			StringParser.generateFromParse(generable, word, ',', ';');
-			items.put(generable.getName(), generable);
-		}
-		return items;
-	}
 
 }

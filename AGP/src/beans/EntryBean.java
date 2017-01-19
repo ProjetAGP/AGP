@@ -1,32 +1,63 @@
 package beans;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@SuppressWarnings("serial")
-@ManagedBean(name = "entry")
+import org.apache.lucene.analysis.ReusableAnalyzerBase;
+
+import lucene.DataReader;
+import lucene.LuceneTester;
+import data.Hotel;
+import data.InputData;
+import engine.OfferTools;
+import persistence.HotelData;
+import persistence.TouristicSiteData;
+import persistence.PersistenceData;
+import tools.parse.StringParser;
+
+@ManagedBean
 @SessionScoped
 public class EntryBean implements Serializable {
 
-	private int id;
 	private int budget;
-	private String touristicalSite = "Activity";
-	private int confort = 1;
-	private String keyWord = "keyWord";
+	private String touristicalSite ="historic";
+	private int confort ;
+	private String keyWord="w w";
 
-	public String verify() {
+	private List<HotelData> hotels = new ArrayList<HotelData>();
+	private List<TouristicSiteData> sites = new ArrayList<TouristicSiteData>();
 
-		return "valid";
+	public String verify() throws IOException {
+
+		InputData inputData = new InputData();
+		StringParser.generateFromParse(inputData, toLine(this), ',', ';');
+
+		hotels = OfferTools.getResquestHotel(inputData);
+		sites = OfferTools.getRequestSite(inputData,keyWord);
+
+		return "listHotel";
 	}
 
-	public int getId() {
-		return id;
+	
+	
+	@Override
+	public String toString() {
+		return "EntryBean [budget=" + budget + ", touristicalSite="
+				+ touristicalSite + ", confort=" + confort + ", keyWord="
+				+ keyWord + ", hotels=" + hotels + ", sites=" + sites + "]";
 	}
 
-	public void setId(int id) {
-		this.id = id;
+
+
+	public static String toLine(EntryBean bean) {
+		return bean.budget + "," + bean.touristicalSite + "," + bean.keyWord
+				+ "," + bean.confort + ";";
 	}
 
 	public int getBudget() {
@@ -61,9 +92,20 @@ public class EntryBean implements Serializable {
 		this.keyWord = keyWord;
 	}
 
-	public static String toLine(EntryBean entryBean) {
-		return entryBean.getBudget() + "," + entryBean.getTouristicalSite() + "," + entryBean.getKeyWord() + ","
-				+ entryBean.getConfort() + ";";
+	public List<HotelData> getHotels() {
+		return hotels;
+	}
+
+	public void setHotels(List<HotelData> hotels) {
+		hotels = hotels;
+	}
+
+	public List<TouristicSiteData> getSites() {
+		return sites;
+	}
+
+	public void setSites(List<TouristicSiteData> sites) {
+		sites = sites;
 	}
 
 }
