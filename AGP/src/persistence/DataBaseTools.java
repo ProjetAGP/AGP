@@ -3,10 +3,6 @@ package persistence;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import tools.parse.StringParseGenerable;
-import tools.parse.StringParser;
 
 public class DataBaseTools {
 

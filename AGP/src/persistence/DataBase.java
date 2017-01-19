@@ -181,4 +181,40 @@ public class DataBase {
 		return this.executionUpdate(SQL);
 	}
 
+	public Connection getConnection() {
+		return connection;
+	}
+
+	public Statement getStatement() {
+		return statement;
+	}
+
+	public String getSQL() {
+		return SQL;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public Socket getClient() {
+		return client;
+	}
+
+	public int getPort() {
+		return Port;
+	}
+
+	public String getHost() {
+		return Host;
+	}
+
 }

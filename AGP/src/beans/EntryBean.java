@@ -26,38 +26,35 @@ import tools.parse.StringParser;
 public class EntryBean implements Serializable {
 
 	private int budget;
-	private String touristicalSite ="historic";
-	private int confort ;
-	private String keyWord="w w";
+	private String touristicalSite = "historic";
+	private int confort;
+	private String keyWord = "w w";
 
 	private List<HotelData> hotels = new ArrayList<HotelData>();
 	private List<TouristicSiteData> sites = new ArrayList<TouristicSiteData>();
 
-	public String verify() throws IOException {
-
-		InputData inputData = new InputData();
-		StringParser.generateFromParse(inputData, toLine(this), ',', ';');
-
-		hotels = OfferTools.getResquestHotel(inputData);
-		sites = OfferTools.getRequestSite(inputData,keyWord);
-
+	public String verify() {/*
+							 * throws IOException {
+							 * 
+							 * InputData inputData = new InputData();
+							 * StringParser.generateFromParse(inputData,
+							 * toLine(this), ',', ';');
+							 * 
+							 * hotels = OfferTools.getResquestHotel(inputData);
+							 * sites =
+							 * OfferTools.getRequestSite(inputData,keyWord);
+							 */
 		return "listHotel";
 	}
 
-	
-	
 	@Override
 	public String toString() {
-		return "EntryBean [budget=" + budget + ", touristicalSite="
-				+ touristicalSite + ", confort=" + confort + ", keyWord="
-				+ keyWord + ", hotels=" + hotels + ", sites=" + sites + "]";
+		return "EntryBean [budget=" + budget + ", touristicalSite=" + touristicalSite + ", confort=" + confort
+				+ ", keyWord=" + keyWord + ", hotels=" + hotels + ", sites=" + sites + "]";
 	}
 
-
-
 	public static String toLine(EntryBean bean) {
-		return bean.budget + "," + bean.touristicalSite + "," + bean.keyWord
-				+ "," + bean.confort + ";";
+		return bean.budget + "," + bean.touristicalSite + "," + bean.keyWord + "," + bean.confort + ";";
 	}
 
 	public int getBudget() {

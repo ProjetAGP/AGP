@@ -1,92 +1,91 @@
 package persistence;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class HotelData {
 	
 
-	private int ID_HOTEL;
-	private int HRANGE;
-    private int PRICE;
-	private String NAME;
-	private String ADDRESS;
-	private int LONGITUDE;
-	private int LATITUDE;
+	private int id_hotel;
+	private int hrange;
+    private int price;
+	private String name;
+	private String address;
+	private int longitude;
+	private int lattitude;
 
 	public HotelData() {
 	}
 	
 	
 
-	public HotelData(int iD_HOTEL, int hRANGE, int pRICE, String nAME,
-			String aDDRESS, int lONGITUDE, int lATITUDE) {
-		ID_HOTEL = iD_HOTEL;
-		HRANGE = hRANGE;
-		PRICE = pRICE;
-		NAME = nAME;
-		ADDRESS = aDDRESS;
-		LONGITUDE = lONGITUDE;
-		LATITUDE = lATITUDE;
+	public HotelData(int id_hotel, int hrange, int price, String name,
+			String address, int longitude, int lattitude) {
+		this.id_hotel = id_hotel;
+		this.hrange = hrange;
+		this.price = price;
+		this.name = name;
+		this.address = address;
+		this.longitude = longitude;
+		this.lattitude = lattitude;
 	}
 
 
 
 	public int getID_HOTEL() {
-		return ID_HOTEL;
+		return id_hotel;
 	}
 
 	public void setID_HOTEL(int iD_HOTEL) {
-		ID_HOTEL = iD_HOTEL;
+		id_hotel = iD_HOTEL;
 	}
 
 	public int getHRANGE() {
-		return HRANGE;
+		return hrange;
 	}
 
 	public void setHRANGE(int hRANGE) {
-		HRANGE = hRANGE;
+		hrange = hRANGE;
 	}
 
 	public int getPRICE() {
-		return PRICE;
+		return price;
 	}
 
 	public void setPRICE(int pRICE) {
-		PRICE = pRICE;
+		price = pRICE;
 	}
 
 	public String getNAME() {
-		return NAME;
+		return name;
 	}
 
 	public void setNAME(String nAME) {
-		NAME = nAME;
+		name = nAME;
 	}
 
 	public String getADDRESS() {
-		return ADDRESS;
+		return address;
 	}
 
 	public void setADDRESS(String aDDRESS) {
-		ADDRESS = aDDRESS;
+		address = aDDRESS;
 	}
 
 	public int getLONGITUDE() {
-		return LONGITUDE;
+		return longitude;
 	}
 
 	public void setLONGITUDE(int lONGITUDE) {
-		LONGITUDE = lONGITUDE;
+		longitude = lONGITUDE;
 	}
 
 	public int getLATITUDE() {
-		return LATITUDE;
+		return lattitude;
 	}
 
 	public void setLATITUDE(int lATITUDE) {
-		LATITUDE = lATITUDE;
+		lattitude = lATITUDE;
 	}
 
-	
+	public String toLog() {
+		return name+","+hrange+","+price+";";
+	}
 }

@@ -1,91 +1,81 @@
 package persistence;
 
-public class TouristicSiteData {
+import tools.parse.StringParseLoggable;
+
+public class TouristicSiteData implements StringParseLoggable {
+
+	private int id_site;
+	private String name;
+	private int price;
+	private String type;
+	private String address;
+	private int longitude;
+	private int lattitude;
+	private int duration;
+	private TouristicSiteData site = new TouristicSiteData();
+	// attributAbc
+	// constante : public static final int CONSTANT_A
+
 	
-	private int ID_SITE;
-	private String NAME;
-    private int PRICE;
-	private String TYPE;
-	private String ADDRESS;
-	private int LONGITUDE;
-	private int LATITUDE;
-	//attributAbc
-	//constante : public static final int CONSTANT_A
-	
-	public TouristicSiteData(){
-		
+
+	public TouristicSiteData(int i, String string, int j, String string2, String string3, int k, int l) {
+
+	}
+	public TouristicSiteData(int id_site, String name, int price, String type, String adresse, int duration,
+			int longitude, int lattitude) {
+		this.id_site = id_site;
+		this.name = name;
+		this.price = price;
+		this.type = type;
+		this.duration = duration;
+		this.address = adresse;
+		this.longitude = longitude;
+		this.lattitude = lattitude;
 	}
 
-	public TouristicSiteData(int iD_SITE, String name, int pRICE, String tYPE,
-			String aDDRESS, int lONGITUDE, int lATITUDE) {
-		super();
-		ID_SITE = iD_SITE;
-		NAME = name;
-		PRICE = pRICE;
-		TYPE = tYPE;
-		ADDRESS = aDDRESS;
-		LONGITUDE = lONGITUDE;
-		LATITUDE = lATITUDE;
+	public TouristicSiteData() {
 	}
-
-	public int getID_SITE() {
-		return ID_SITE;
-	}
-
-	public void setID_SITE(int iD_SITE) {
-		ID_SITE = iD_SITE;
-	}
-
-	public String getNAME() {
-		return NAME;
-	}
-
-	public void setNAME(String nAME) {
-		NAME = nAME;
-	}
-
-	public int getPRICE() {
-		return PRICE;
-	}
-
-	public void setPRICE(int pRICE) {
-		PRICE = pRICE;
-	}
-
-	public String getTYPE() {
-		return TYPE;
-	}
-
-	public void setTYPE(String tYPE) {
-		TYPE = tYPE;
-	}
-
-	public String getADDRESS() {
-		return ADDRESS;
-	}
-
-	public void setADDRESS(String aDDRESS) {
-		ADDRESS = aDDRESS;
-	}
-
-	public int getLONGITUDE() {
-		return LONGITUDE;
-	}
-
-	public void setLONGITUDE(int lONGITUDE) {
-		LONGITUDE = lONGITUDE;
-	}
-
-	public int getLATITUDE() {
-		return LATITUDE;
-	}
-
-	public void setLATITUDE(int lATITUDE) {
-		LATITUDE = lATITUDE;
-	}
-
 
 	
 	
-	
+	public int getId_site() {
+		return id_site;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public int getLongitude() {
+		return longitude;
+	}
+
+	public int getLattitude() {
+		return lattitude;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public TouristicSiteData getSite() {
+		return site;
+	}
+
+	public String toLog() {
+		return name + "," + type + "," + duration + "," + price + ";";
+	}
+
 }
