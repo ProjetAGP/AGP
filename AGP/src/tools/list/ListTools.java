@@ -6,6 +6,7 @@ import java.util.List;
 
 import tools.math.MathComparator;
 
+
 public class ListTools {
 	public static ArrayList<Double> sortListByNumberDesc(ListTools listTools,ArrayList<Double> list){
 		 list.sort(MathComparator.getDouble(MathComparator.SUP_DOUBLE));
