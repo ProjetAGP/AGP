@@ -1,0 +1,5 @@
+attraction1,historic,30,30;
+attraction2,leisure,40,100;
+attraction3,historic,20,70;
+attraction4,historic,40,40;
+attraction5,leisure,50,100;
