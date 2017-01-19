@@ -2,14 +2,10 @@ package engine;
 
 import java.util.HashMap;
 
-
 import data.Hotel;
-import data.Offer;
 import data.TouristAttraction;
-import data.constants.Constants;
 import data.constants.Transport;
 import lucene.DataReader;
-import tools.math.MathTools;
 
 public class AttrationsTools implements CaculationTools{
 	public static HashMap<String, Integer> datas = new HashMap<String, Integer>();

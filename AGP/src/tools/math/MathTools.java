@@ -5,4 +5,7 @@ public class MathTools {
 		return value < min ? min : value > max ? max : value;
 	}
 	
+	public static double absoluteValue(double value){
+		return value = value < 0 ? -value : value;
+	}
 }

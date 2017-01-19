@@ -13,20 +13,23 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
-public class Indexer {
+//This class is used to index the raw data so that we can make it searchable using lucene library.
+class Indexer {
 
    private IndexWriter writer;
 
    @SuppressWarnings("deprecation")
+   
 public Indexer(String indexDirectoryPath) throws IOException{
-      //this directory will contain the indexes
+      //this directory will contain the indexes 
       Directory indexDirectory = 
          FSDirectory.open(new File(indexDirectoryPath));
 
-      //create the indexer
+      //this class creates/ updates indexes
+      /*Analyzer class is responsible to analyze a document and get the tokens/words 
+      from the text which is to be indexed.*/
       writer = new IndexWriter(indexDirectory, 
-         new StandardAnalyzer(Version.LUCENE_36),true,
-         IndexWriter.MaxFieldLength.UNLIMITED);
+         new StandardAnalyzer(Version.LUCENE_36),true, IndexWriter.MaxFieldLength.UNLIMITED);
    }
 
    public void close() throws CorruptIndexException, IOException{

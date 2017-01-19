@@ -2,9 +2,7 @@ package data;
 
 import java.util.ArrayList;
 
-import engine.AttrationsTools;
 import engine.OfferTools;
-import engine.TripTools;
 
 public class Offer {
 	private ArrayList<Trip> trips = new ArrayList<Trip>();

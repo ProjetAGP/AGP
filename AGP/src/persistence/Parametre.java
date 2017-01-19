@@ -1,32 +1,49 @@
 package persistence;
 
-
-
-
-import java.util.Date;
-
-
-
-
 public class Parametre {
     
-    public static String IPHOST="127.0.0.1" ;
-    public static String Data;
-    public static String username;
-    public static String Host;
+    private static String iphost="127.0.0.1" ;
+    private String data;
+    private static String userName;
+    private static String host;
     
-    public static String password;
-    public static int Port=11111 ;
-    public static String Util ;
+    private static String password;
+    private static int Port=8081 ;
+    private static String Util ;
     
-    public Parametre(String username,String password,String Data){
-    this.Data=Data;
-    this.username=username;
-    this.password=password;
-    Host="jdbc:mysql://"+ IPHOST+":3306/"+Data+"?useUnicode=true&characterEncoding=UTF-8";
-}
+    public Parametre(String username,String password,String data){
+        this.data=data;
+        Parametre.userName=username;
+        Parametre.password=password;
+        host="jdbc:mysql://"+ iphost+":3306/"+data+"?useUnicode=true&characterEncoding=UTF-8";
+    }
 
- 
+	public static String getIPHOST() {
+		return iphost;
+	}
 
-    
+	public String getData() {
+		return data;
+	}
+
+	public static String getUsername() {
+		return userName;
+	}
+
+	public static String getHost() {
+		return host;
+	}
+
+	public static String getPassword() {
+		return password;
+	}
+
+	public static int getPort() {
+		return Port;
+	}
+
+	public static String getUtil() {
+		return Util;
+	}
+   
 }

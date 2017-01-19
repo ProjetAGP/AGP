@@ -1,23 +1,30 @@
 package persistence;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class HotelData {
+	
 
 	private int ID_HOTEL;
+	private int HRANGE;
+    private int PRICE;
 	private String NAME;
-	private int PRICE;
-	private int RANG;
+	private String ADDRESS;
+	private int LONGITUDE;
+	private int LATITUDE;
 
 	public HotelData() {
 	}
+	
+	
 
-	public HotelData(int iD_HOTEL, String nAME, int pRICE, int rANG) {
+	public HotelData(int iD_HOTEL, int hRANGE, int pRICE, String nAME,
+			String aDDRESS, int lONGITUDE, int lATITUDE) {
 		ID_HOTEL = iD_HOTEL;
-		NAME = nAME;
+		HRANGE = hRANGE;
 		PRICE = pRICE;
-		RANG = rANG;
+		NAME = nAME;
+		ADDRESS = aDDRESS;
+		LONGITUDE = lONGITUDE;
+		LATITUDE = lATITUDE;
 	}
 
 
@@ -30,12 +37,12 @@ public class HotelData {
 		ID_HOTEL = iD_HOTEL;
 	}
 
-	public String getNAME() {
-		return NAME;
+	public int getHRANGE() {
+		return HRANGE;
 	}
 
-	public void setNAME(String nAME) {
-		NAME = nAME;
+	public void setHRANGE(int hRANGE) {
+		HRANGE = hRANGE;
 	}
 
 	public int getPRICE() {
@@ -46,12 +53,37 @@ public class HotelData {
 		PRICE = pRICE;
 	}
 
-	public int getRANG() {
-		return RANG;
+	public String getNAME() {
+		return NAME;
 	}
 
-	public void setRANG(int rANG) {
-		RANG = rANG;
+	public void setNAME(String nAME) {
+		NAME = nAME;
 	}
 
+	public String getADDRESS() {
+		return ADDRESS;
+	}
+
+	public void setADDRESS(String aDDRESS) {
+		ADDRESS = aDDRESS;
+	}
+
+	public int getLONGITUDE() {
+		return LONGITUDE;
+	}
+
+	public void setLONGITUDE(int lONGITUDE) {
+		LONGITUDE = lONGITUDE;
+	}
+
+	public int getLATITUDE() {
+		return LATITUDE;
+	}
+
+	public void setLATITUDE(int lATITUDE) {
+		LATITUDE = lATITUDE;
+	}
+
+	
 }

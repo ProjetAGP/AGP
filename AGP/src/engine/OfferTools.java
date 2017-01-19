@@ -1,6 +1,12 @@
 package engine;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import data.Hotel;
+import data.InputData;
 import data.Offer;
+import data.TouristAttraction;
 import data.Trip;
 import data.constants.Constants;
 import tools.math.MathTools;
@@ -10,7 +16,7 @@ public class OfferTools implements CaculationTools{
 		int transport = getAllTransportTime(offer);
 		int hotelTime = Constants.MINUTES_IN_DAY - (activity + transport);
 		return (int) MathTools
-				.boundValue((activity * (0.75) + hotelTime * (0.1 * offer.getHotel().getRange()) - transport)
+				.boundValue((activity * (0.75) + hotelTime * (0.5 * offer.getHotel().getRange()) - transport)
 						/ Constants.COMFORT_REGULATION, 1, 5);
 	}
 	
@@ -45,4 +51,15 @@ public class OfferTools implements CaculationTools{
 		return time;
 	}
 
+	public static void getWantedHotel(HashMap<String, Hotel> hotels,InputData input){
+		for(String hotelid : hotels.keySet())
+			if(MathTools.absoluteValue(hotels.get(hotelid).getRange() - input.getComfort()) > 1)
+				hotels.remove(hotelid);
+	}
+	
+	public static void getWantedAttractions(HashMap<String, TouristAttraction> attractions,InputData input){
+		for(String attractionid : attractions.keySet())
+			if(input.getType() !=  attractions.get(attractionid).getType())
+				attractions.remove(attractionid);
+	}
 }

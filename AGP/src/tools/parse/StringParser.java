@@ -13,6 +13,12 @@ public class StringParser {
 		return item;
 	}
 	
+	public static StringParseGenerable  generateFromParse(StringParseGenerable item ,String line,char separator){
+		ArrayList<String> args = sliceLine(line,separator);
+		item.generateItem(args);
+		return item;
+	}
+	
 	public static int getIndexOfWord(String w, String chain) {
 		/**
 		 * get the index of the first character of the word w if chain contains
@@ -30,7 +36,7 @@ public class StringParser {
 	public static String getNextWord(String line, int index,char separator){
 		/**get the whole text between index and the next separation*/
 		int last = index;
-		while(line.charAt(index) != separator)
+		while(line.charAt(index) != separator && !isLineEnd(index, line))
 			index++;
 		String word = line.substring(last,index);
 		System.out.println(word);
@@ -61,6 +67,22 @@ public class StringParser {
 		return words;
 	}
 	
+	
+	public static ArrayList<String> sliceLine(String line,char separator){
+		/**get the whole text between index and the next separation*/
+		ArrayList<String> words = new ArrayList<String>();
+		int index = 0;
+		while(true)
+		{
+			String word = getNextWord(line, index,separator);
+			words.add(word);
+			index += word.length();
+			if(isLineEnd(index, line))break;
+			index++;
+		}
+		return words;
+	}
+	
 	public static ArrayList<String> readData(String fileName) {
 		/**Read the file and place each lines of the text in an ArrayList<String>*/
 		ArrayList<String> lines = new ArrayList<String>();
@@ -78,4 +100,7 @@ public class StringParser {
 		return lines;
 	}
 	
+	public static boolean isLineEnd(int index,String line){
+		return index == line.length();
+	}
 }

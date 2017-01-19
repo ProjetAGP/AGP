@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	lang="#{localeBean.language}">
+<f:view locale="#{localeBean.locale}" />
+<h:head>
+	<title>JSF</title>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+</h:head>
+<h:body>
+
+	<strong>#{msg['label.home.welcome']}</strong>
+
+	<br />
+	<br />
+	<br />
+	<h:panelGroup>
+		<fieldset>
+			<legend>#{msg['label.home.form']}</legend>
+			<h:form styleClass="form-horizontal">
+
+				<div class="form-group">
+					<h:outputLabel value="budget" styleClass="control-label col-sm-2" />
+					<div class="col-sm-5">
+						<h:inputText value="#{entryBean.budget}" required="true"
+							requiredMessage="You must enter a budget to search"
+							converterMessage="Budget must be numerals" id="budget"
+							styleClass="form-control" />
+					</div>
+					<h:message for="budget" />
+				</div>
+
+
+
+				<div class="form-group">
+					<h:outputLabel value="HistoricalSites"
+						styleClass="control-label col-sm-2" />
+					<div class="col-sm-5">
+
+						<h:selectOneMenu id="item1" value="#{entryBean.touristicalSite}"
+							required="true">
+							<f:selectItem itemValue="Activity" itemLabel="Activity" />
+							<f:selectItem itemValue="HistoricalSite"
+								itemLabel="HistoricalSite" />
+						</h:selectOneMenu>
+
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<h:outputLabel value="Confort"
+						styleClass="control-label col-sm-2" />
+					<div class="col-sm-5">
+
+						<h:selectOneMenu id="item2" value="#{entryBean.confort}"
+							required="true">
+							<f:selectItem itemValue="1" itemLabel="1" />
+							<f:selectItem itemValue="2" itemLabel="2" />
+							<f:selectItem itemValue="3" itemLabel="3" />
+							<f:selectItem itemValue="4" itemLabel="4" />
+							<f:selectItem itemValue="5" itemLabel="5" />
+								
+						</h:selectOneMenu>
+
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<h:outputLabel value="KeyWord" styleClass="control-label col-sm-2" />
+					<div class="col-sm-5">
+						<h:inputText value="#{entryBean.keyWord}" required="true"
+							requiredMessage="You must enter a key word to search"
+							converterMessage="Key word must be a pertinent word" id="Keyword"
+							styleClass="form-control" />
+					</div>
+					<h:message for="Keyword" />
+				</div>
+
+				<div class="col-sm-offset-4">
+					<h:commandButton value="#{msg['label.home.commit']}"
+						action="#{entryBean.verify}" styleClass="btn btn-default" />
+				</div>
+
+
+
+			</h:form>
+
+
+
+
+
+		</fieldset>
+	</h:panelGroup>
+
+	<br />
+	<br />
+	<br />
+			<h:form>
+        Select language
+                <h:selectOneMenu value="#{localeBean.language}"
+					onchange="submit()">
+					<f:selectItems value="#{localeBean.locales}" />
+				</h:selectOneMenu>
+			</h:form>
+
+			<h:form>
+				<h:commandButton value="#{msg['label.home.switchLanguage']}"
+					actionListener="#{localeBean.swapLocale}" immediate="true" />
+			</h:form>
+
+
+</h:body>
+</html>

@@ -1,23 +1,20 @@
 package beans;
 
 import java.io.Serializable;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import persistence.BD;
-import persistence.Parametre;
-
+@SuppressWarnings("serial")
 @ManagedBean(name = "entry")
 @SessionScoped
 public class EntryBean implements Serializable {
 
 	private int id;
 	private int budget;
-	private String TouristicalSite = "Activity";
+	private String touristicalSite = "Activity";
 	private int confort = 1;
+	private String keyWord = "keyWord";
 
 	public String verify() {
 
@@ -41,11 +38,11 @@ public class EntryBean implements Serializable {
 	}
 
 	public String getTouristicalSite() {
-		return TouristicalSite;
+		return touristicalSite;
 	}
 
 	public void setTouristicalSite(String touristicalSite) {
-		TouristicalSite = touristicalSite;
+		this.touristicalSite = touristicalSite;
 	}
 
 	public int getConfort() {
@@ -55,6 +52,18 @@ public class EntryBean implements Serializable {
 	public void setConfort(int confort) {
 		this.confort = confort;
 	}
-	
+
+	public String getKeyWord() {
+		return keyWord;
+	}
+
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
+	}
+
+	public static String toLine(EntryBean entryBean) {
+		return entryBean.getBudget() + "," + entryBean.getTouristicalSite() + "," + entryBean.getKeyWord() + ","
+				+ entryBean.getConfort() + ";";
+	}
 
 }

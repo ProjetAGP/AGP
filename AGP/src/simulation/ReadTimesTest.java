@@ -3,7 +3,6 @@ package simulation;
 import java.util.ArrayList;
 
 import data.constants.Constants;
-import lucene.DataReader;
 import tools.parse.StringParser;
 
 public class ReadTimesTest {
