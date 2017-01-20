@@ -6,7 +6,9 @@ import java.util.HashMap;
 import data.Hotel;
 import data.InputData;
 import data.TouristAttraction;
+import data.TransportRoad;
 import data.Trip;
+import persistence.TransportData;
 
 public class RequestManager {
 
@@ -23,4 +25,6 @@ public class RequestManager {
 			
 		return null;
 	}
+	
+	
 }

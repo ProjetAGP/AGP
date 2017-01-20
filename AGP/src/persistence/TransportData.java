@@ -4,12 +4,14 @@ import tools.parse.StringParseLoggable;
 
 public class TransportData implements StringParseLoggable {
 
+	private int id;
 	private String hotelName;
 	private String attractionName;
 	private String transport;
 	private int duration;
 
-	public TransportData(String hotelName, String attractionName, String transport, int duration) {
+	public TransportData(int id,String hotelName, String attractionName, String transport, int duration) {
+		this.id = id;
 		this.hotelName = hotelName;
 		this.attractionName = attractionName;
 		this.transport = transport;

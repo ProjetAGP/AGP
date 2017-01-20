@@ -8,7 +8,6 @@ import data.Hotel;
 import data.TouristAttraction;
 import lucene.DataReader;
 import tools.math.RandomInt;
-import tools.parse.StringParser;
 
 public class TransportGenerator {
 
@@ -25,13 +24,12 @@ public class TransportGenerator {
 		for (String hot : hotels.keySet()) {
 			for (String atr : attractions.keySet()) {
 				int v = RandomInt.generate(2);
-				String transport = "";
 				if (v == 0 || v == 2) {
-					words.add("(" + index + ", " + hot + ", " + atr + ", 'autobus', " + RandomInt.generate(15, 90) + "),");
+					words.add("(" + index + ", " + hot + ", " + atr + ", 'autobus', " + RandomInt.generate(rand,15, 90) + "),");
 					index++;
 				}
 				if (v == 1 || v == 2) {
-					words.add("(" + index + ", " + hot + ", " + atr + ", 'boat', " + RandomInt.generate(15, 90) + "),");
+					words.add("(" + index + ", " + hot + ", " + atr + ", 'boat', " + RandomInt.generate(rand,15, 90) + "),");
 					index++;
 				}
 			}

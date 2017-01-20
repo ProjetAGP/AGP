@@ -13,6 +13,7 @@ import data.Hotel;
 import data.InputData;
 import data.Offer;
 import data.TouristAttraction;
+import data.TransportRoad;
 import data.Trip;
 import data.constants.Constants;
 
@@ -66,11 +67,24 @@ public class OfferTools implements CaculationTools {
 		for (int i = 0; i < l.getResultsLucene().size(); i++) 
 
 			p.persisteSite("NAME='" + l.getResultsLucene().get(i) + "'");
+		return p.getTouristicSites();
 
+	}
+	
+	public static List<TouristicSiteData> getRequestTransport() {
+		PersistenceData p = new PersistenceData();
+		p.removeHotels();
+		try {
+			p.persisteTransport("DURATION <= "+Constants.TRANSPORT_MAX_DURATION);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return p.getTouristicSites();
 
 	}
+
 
 	public static float getHotelCost(Offer offer) {
 		return offer.getHotel().getDailyPrice() * offer.getDuration();
