@@ -11,5 +11,7 @@ public class Constants {
 	public static final int COMFORT_REGULATION = 150;
 	public static final String HOTELS_FILE = SIM_DATA_PATH+"/hotel.txt";
 	public static final String SITES_FILE = SIM_DATA_PATH+"/sites.txt";
+	public static final String TRANSPORT_FILE = SIM_DATA_PATH+"/generatedTransport.txt";
+
 	
 }
