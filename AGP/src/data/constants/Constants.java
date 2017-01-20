@@ -13,6 +13,7 @@ public class Constants {
 	public static final String SITES_FILE = SIM_DATA_PATH+"/sites.txt";
 	public static final String TRANSPORT_FILE = SIM_DATA_PATH+"/generatedTransport.txt";
 	public static final int TRANSPORT_MAX_DURATION = 45;
+	public static final int MAX_TRIP_NUMBER = 4;
 
 	
 }
