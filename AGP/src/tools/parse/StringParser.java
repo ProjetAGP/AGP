@@ -1,25 +1,28 @@
 package tools.parse;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StringParser {
 
-	public static StringParseGenerable  generateFromParse(StringParseGenerable item ,String line,char separator,char endOfLine){
-		ArrayList<String> args = sliceLine(line,separator,endOfLine);
+	public static StringParseGenerable generateFromParse(StringParseGenerable item, String line, char separator,
+			char endOfLine) {
+		ArrayList<String> args = sliceLine(line, separator, endOfLine);
 		item.generateItem(args);
 		return item;
 	}
-	
-	public static StringParseGenerable  generateFromParse(StringParseGenerable item ,String line,char separator){
-		ArrayList<String> args = sliceLine(line,separator);
+
+	public static StringParseGenerable generateFromParse(StringParseGenerable item, String line, char separator) {
+		ArrayList<String> args = sliceLine(line, separator);
 		item.generateItem(args);
 		return item;
 	}
-	
+
 	public static HashMap<String, StringParseGenerable> convertDataLines(StringParseGenerable generable,
 			ArrayList<String> words) {
 		HashMap<String, StringParseGenerable> items = new HashMap<String, StringParseGenerable>();
@@ -29,7 +32,7 @@ public class StringParser {
 		}
 		return items;
 	}
-	
+
 	public static int getIndexOfWord(String w, String chain) {
 		/**
 		 * get the index of the first character of the word w if chain contains
@@ -43,59 +46,61 @@ public class StringParser {
 		}
 		return -1;
 	}
-	
-	public static String getNextWord(String line, int index,char separator){
-		/**get the whole text between index and the next separation*/
+
+	public static String getNextWord(String line, int index, char separator) {
+		/** get the whole text between index and the next separation */
 		int last = index;
-		while(line.charAt(index) != separator && !isLineEnd(index, line))
+		while (line.charAt(index) != separator && !isLineEnd(index, line))
 			index++;
-		String word = line.substring(last,index);
+		String word = line.substring(last, index);
 		System.out.println(word);
 		return word;
 	}
-	
-	public static String getNextWord(String line, int index,char separator,char endOfLine){
-		/**get the whole text between index and the next separation*/
+
+	public static String getNextWord(String line, int index, char separator, char endOfLine) {
+		/** get the whole text between index and the next separation */
 		int last = index;
-		while(line.charAt(index) != separator && line.charAt(index) != endOfLine)
+		while (line.charAt(index) != separator && line.charAt(index) != endOfLine)
 			index++;
-		String word = line.substring(last,index);
+		String word = line.substring(last, index);
 		return word;
 	}
-	
-	public static ArrayList<String> sliceLine(String line,char separator,char endOfLine){
-		/**get the whole text between index and the next separation*/
+
+	public static ArrayList<String> sliceLine(String line, char separator, char endOfLine) {
+		/** get the whole text between index and the next separation */
 		ArrayList<String> words = new ArrayList<String>();
 		int index = 0;
-		while(true)
-		{
+		while (true) {
 			String word = getNextWord(line, index, separator, endOfLine);
 			words.add(word);
 			index += word.length();
-			if(line.charAt(index) == endOfLine)break;
+			if (line.charAt(index) == endOfLine)
+				break;
 			index++;
 		}
 		return words;
 	}
-	
-	
-	public static ArrayList<String> sliceLine(String line,char separator){
-		/**get the whole text between index and the next separation*/
+
+	public static ArrayList<String> sliceLine(String line, char separator) {
+		/** get the whole text between index and the next separation */
 		ArrayList<String> words = new ArrayList<String>();
 		int index = 0;
-		while(true)
-		{
-			String word = getNextWord(line, index,separator);
+		while (true) {
+			String word = getNextWord(line, index, separator);
 			words.add(word);
 			index += word.length();
-			if(isLineEnd(index, line))break;
+			if (isLineEnd(index, line))
+				break;
 			index++;
 		}
 		return words;
 	}
-	
+
 	public static ArrayList<String> readData(String fileName) {
-		/**Read the file and place each lines of the text in an ArrayList<String>*/
+		/**
+		 * Read the file and place each lines of the text in an
+		 * ArrayList<String>
+		 */
 		ArrayList<String> lines = new ArrayList<String>();
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 
@@ -110,8 +115,25 @@ public class StringParser {
 		}
 		return lines;
 	}
-	
-	public static boolean isLineEnd(int index,String line){
+
+	public void writeData(String path, ArrayList<String> words) {
+		try {
+
+			FileWriter fw = new FileWriter(path, true);
+			BufferedWriter output = new BufferedWriter(fw);
+
+			for (int i = 0; i < words.size(); i++)
+				output.write(words.get(0));
+			output.flush();
+			output.close();
+
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+
+	}
+
+	public static boolean isLineEnd(int index, String line) {
 		return index == line.length();
 	}
 }
